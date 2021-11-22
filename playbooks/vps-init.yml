@@ -6,6 +6,9 @@
 ### Ensure ssh password login is disabled
 ### Disable root ssh login ASAP
 
+### Note: root password will be re-hashed on run
+### because password_hash is not idempotent
+
 - hosts: all
   become: true
   remote_user: root
