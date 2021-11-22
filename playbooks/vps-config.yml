@@ -1,17 +1,8 @@
 
 # Config:
-# 
+# Intended for setting up scripts 
+# outside the scope of vps-package
 
-
-# Synchronize:
-# authorized keys
-# users
-# development directory
-# traefik ca certificates?
-# installed packages?
-
-# On rebuild:
-# If a server is rebuilt, ensure it conforms to vps-X naming scheme
 
 ---
 - hosts: webservers
