@@ -7,7 +7,7 @@
 - name: Initialize
   import_playbook: vps-init.yml
 
-  # Create user user accounts, 
+# Create user user accounts, 
 # set permissions and groups
 - name: Users
   import_playbook: vps-users.yml
