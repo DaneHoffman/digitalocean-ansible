@@ -3,7 +3,8 @@
 # Creates Ansible user, sets longer root password, 
 # disable remote password login for ssh, 
 # disable all root access over ssh
-# Run only once!
+# Can be run multiple times but
+# root password hash will be regenerated
 - name: Initialize
   import_playbook: vps-init.yml
 
