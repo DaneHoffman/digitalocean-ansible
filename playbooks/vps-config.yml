@@ -17,11 +17,11 @@
         url: https://repos.insights.digitalocean.com/sonar-agent.asc
         state: present
 
-    - name: "Check if do-agent is installed"
+    - name: do-agent check
       package_facts:
         manager: "auto"
     - name: "do-agent result"
       debug:
-          msg: "do-agent not found, installing"
+          msg: do-agent not found, installing
       include_tasks: tasks/install-do-agent.yml
       when: "'do-agent' not in ansible_facts.packages"
