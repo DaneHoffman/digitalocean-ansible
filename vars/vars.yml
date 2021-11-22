@@ -2,7 +2,7 @@ server_1_address: 192.168.1.1
 server_2_address: 192.168.1.2
 
 
-admin_user: cloud-admin
+admin_user: admin
 admin_password: password
 
 ansible_default_user: ansible
