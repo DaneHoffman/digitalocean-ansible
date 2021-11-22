@@ -1,7 +1,7 @@
 ### Purpose of vps-users:
 ### Configure users, permissions, groups, ssh keys
 
-- hosts: cloud
+- hosts: all
   become: true
   remote_user: ansible
   vars_files:

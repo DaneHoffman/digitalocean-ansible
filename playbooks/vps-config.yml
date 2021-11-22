@@ -14,7 +14,7 @@
 # If a server is rebuilt, ensure it conforms to vps-X naming scheme
 
 ---
-- hosts: cloud
+- hosts: webservers
   become: true
   vars_files:
     - ./vars/vars.yml
