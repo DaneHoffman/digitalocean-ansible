@@ -34,23 +34,3 @@
           msg: "do-agent not found, installing"
       include_tasks: tasks/install-do-agent.yml
       when: "'do-agent' not in ansible_facts.packages"
-
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu bionic stable
-        state: present
-
-    - name: Update apt and install docker packages
-      apt: update_cache=yes pkg={{item}} state=latest
-      with_items:
-        - docker-ce
-        - docker-compose
-
-    - name: Install Docker Module for Python
-      pip:
-        name: docker

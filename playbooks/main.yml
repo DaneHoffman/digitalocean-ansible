@@ -21,6 +21,9 @@
 - name: Configure
   import_playbook: vps-config.yml
 
+- name: Docker
+  import_playbook: vps-docker.yml
+
 - name: Update and upgrade
   import_playbook: vps-update.yml
 
