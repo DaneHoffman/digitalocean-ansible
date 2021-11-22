@@ -6,7 +6,6 @@
   remote_user: ansible
   vars_files:
     - ./vars/vars.yml
-    - ./vars/vault-pass.yml
 
   tasks:
 
