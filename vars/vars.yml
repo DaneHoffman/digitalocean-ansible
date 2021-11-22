@@ -1,0 +1,19 @@
+server_1_address: 192.168.1.1
+server_2_address: 192.168.1.2
+
+
+admin_user: cloud-admin
+admin_password: password
+
+ansible_default_user: ansible
+ansible_default_password: password
+ansible_pubkey: 
+ansible_sudo_pass: password
+
+github_password: password
+
+root_pass_alpha: password
+root_pass_beta: password
+
+user_1: user
+userpass_1: password

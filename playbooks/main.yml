@@ -1,0 +1,26 @@
+---
+
+# Creates Ansible user, sets longer root password, 
+# disable remote password login for ssh, 
+# disable all root access over ssh
+# Run only once!
+- name: Initialize
+  import_playbook: vps-init.yml
+
+# Update, install aptitude,
+# install all listed packages
+- name: Apt packages
+  import_playbook: vps-package.yml
+
+# Run scripts
+- name: Configure
+  import_playbook: vps-config.yml
+
+# Create user user accounts, 
+# set permissions and groups
+- name: Users
+  import_playbook: vps-users.yml
+
+- name: Update and upgrade
+  import_playbook: vps-update.yml
+

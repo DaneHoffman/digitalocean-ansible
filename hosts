@@ -1,0 +1,19 @@
+---
+all:
+  vars:
+    ansible_connection: ssh
+
+
+webservers:
+  hosts:
+    server-1:
+      vps_root_pass: "{{ root_pass_1 }}"
+      ansible_host: "{{ server_1_address }}"
+      ansible_user: "{{ ansible_default_user }}"
+      ansible_pass: "{{ ansible_default_pass }}"
+
+    server-2:
+      vps_root_pass: "{{ root_pass_2 }}"
+      ansible_host: "{{ server_2_address }}"
+      ansible_user: "{{ ansible_default_user }}"
+      ansible_pass: "{{ ansible_default_pass }}"

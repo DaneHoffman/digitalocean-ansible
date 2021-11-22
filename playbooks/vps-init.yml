@@ -1,0 +1,56 @@
+---
+### Purpose of vps-init:
+### Connect as passwordless root
+### Set up ansible user
+### Create long root password
+### Ensure ssh password login is disabled
+### Disable root ssh login ASAP
+### Only run this playbook once
+
+- hosts: all
+  become: true
+  remote_user: root
+  vars_files:
+    - ./vars/vars.yml
+
+  tasks:
+
+    - name: Create ansible user
+      user: 
+        name: "{{ ansible_default_user }}"
+        password: "{{ ansible_default_password | password_hash('sha512') }}"
+        groups: 
+          - sudo
+        state: present
+        shell: /bin/bash
+        system: no
+        create_home: yes
+
+    - name: Set authorized key for ansible user
+      authorized_key:
+        user: "{{ ansible_default_user }}"
+        state: present
+        key: "{{ ansible_pubkey }}"
+
+    - name: Set longer root password
+      user:
+        name: root
+        update_password: always
+        password: "{{ vps_root_pass | password_hash('sha512') }}"
+
+
+    - name: Disable root login over SSH
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
+      notify:
+        - restart sshd
+
+    - name: Disable password login
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+      notify:
+        - restart sshd
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted

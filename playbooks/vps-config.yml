@@ -1,0 +1,56 @@
+
+# Config:
+# 
+
+
+# Synchronize:
+# authorized keys
+# users
+# development directory
+# traefik ca certificates?
+# installed packages?
+
+# On rebuild:
+# If a server is rebuilt, ensure it conforms to vps-X naming scheme
+
+---
+- hosts: cloud
+  become: true
+  vars_files:
+    - ./vars/vars.yml
+
+  tasks:
+
+    - name: add apt key
+      apt_key:
+        url: https://repos.insights.digitalocean.com/sonar-agent.asc
+        state: present
+
+    - name: "Check if do-agent is installed"
+      package_facts:
+        manager: "auto"
+    - name: "do-agent result"
+      debug:
+          msg: "do-agent not found, installing"
+      include_tasks: tasks/install-do-agent.yml
+      when: "'do-agent' not in ansible_facts.packages"
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker packages
+      apt: update_cache=yes pkg={{item}} state=latest
+      with_items:
+        - docker-ce
+        - docker-compose
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker

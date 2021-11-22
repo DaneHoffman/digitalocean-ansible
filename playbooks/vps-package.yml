@@ -1,0 +1,45 @@
+---
+### Purpose of vps-package:
+### Install aptitude
+### Upgrade all packages
+### Install packages from list
+### Autoremove unused packages
+
+- hosts: all
+  become: true
+  remote_user: ansible
+  vars_files:
+    - ./vars/vars.yml
+
+  tasks:
+    - name: Install aptitude
+      apt: 
+        pkg: aptitude
+        state: present
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 86400
+
+    - name: Upgrade all packages
+      apt:
+        pkg: "*"
+        state: latest
+        update_cache: no
+
+        
+    - name: Install base packages
+      apt: pkg={{item}} state=present update_cache=no
+      with_items:
+        - mosh
+        - python3
+        - python3-pip
+        - make
+        - sshpass
+        - vim
+        - tmux
+        - curl
+
+    - name: Autoremove unused packages
+      command: apt-get -y autoremove
+      register: apt_result
+      changed_when: "'packages will be REMOVED' in apt_result.stdout"

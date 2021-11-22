@@ -1,0 +1,30 @@
+### Purpose of vps-users:
+### Configure users, permissions, groups, ssh keys
+
+- hosts: cloud
+  become: true
+  remote_user: ansible
+  vars_files:
+    - ./vars/vars.yml
+    - ./vars/vault-pass.yml
+
+  tasks:
+
+    - name: Create admin user
+      user: 
+        name: "{{ admin-user }}"
+        password: "{{ admin-password }}"
+        groups: 
+          - docker
+          - sudo
+        ssh_key_file: 
+        state: present
+        shell: /bin/bash
+        system: no
+        create_home: yes
+
+    - name: Set authorized key for cloud-admin
+      authorized_key:
+        user: "{{ admin-user }}"
+        state: present
+        key: "{{ admin-pubkey }}"
