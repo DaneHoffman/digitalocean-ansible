@@ -7,7 +7,7 @@ admin_password: password
 
 ansible_default_user: ansible
 ansible_default_password: password
-ansible_pubkey: 
+ansible_pubkey: #Generate ssh key on local machine and paste pubkey here
 ansible_sudo_pass: password
 
 github_password: password
