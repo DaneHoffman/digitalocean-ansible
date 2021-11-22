@@ -1,3 +1,5 @@
+# Encrypt this file with ansible-vault!
+
 server_1_address: xx.xx.xx.xx
 server_2_address: xx.xx.xx.xx
 
