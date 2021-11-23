@@ -22,7 +22,7 @@
         system: no
         create_home: yes
 
-    - name: Set authorized key for cloud-admin
+    - name: Set authorized key for admin
       authorized_key:
         user: "{{ admin-user }}"
         state: present
