@@ -11,9 +11,10 @@
 
 - hosts: all
   become: true
-  remote_user: root
   vars_files:
     - ./vars/vars.yml
+  vars:
+    ansible_user: root
 
   tasks:
 
